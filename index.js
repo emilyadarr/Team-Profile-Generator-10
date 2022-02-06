@@ -3,7 +3,7 @@ const inquirer = require('inquirer');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
-const Employee = require('./lib/Employee');
+//const Employee = require('./lib/Employee');
 
 const promptManager = () => {
   console.log(`Please build your team`);
@@ -32,12 +32,13 @@ const promptManager = () => {
     }
   ])
   .then(({ name, id, email, officeNumber }) => {
-    this.Manager = new Manager(name, id, email, officeNumber);
+    managerData = new Manager(name, id, email, officeNumber);
   })
   .then(nextMemberPrompt)
 };
 
 const promptEngineer = () => {
+  // engineerData = this.Engineer
   if (!this.Engineer) {
     this.Engineer = [];
   }
@@ -71,6 +72,7 @@ const promptEngineer = () => {
 };
 
 const promptIntern = () => {
+  //internData = this.Engineer
   if (!this.Intern) {
     this.Intern = [];
   }
@@ -118,11 +120,17 @@ const nextMemberPrompt = () => {
     }
     else {
       console.log('data collected');
-      console.log(this.Manager);
-      console.log(this.Engineer);
-      console.log(this.Intern);
+      //console.log(this.Manager);
+      console.log(managerData);
+      console.log(managerData.name);
+      console.log(managerData.id);
+      //console.log(this.Engineer);
+      const engineerData = this.Engineer;
+      console.log(engineerData);
+      const internData = this.Intern;
+      console.log(internData);
     }
   })
 };
 
-promptManager()
+promptManager();
