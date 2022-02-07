@@ -4,6 +4,8 @@ const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 //const Employee = require('./lib/Employee');
+const generatePage = require('./src/page-template');
+const fs = require('fs');
 
 const promptManager = () => {
   console.log(`Please build your team`);
@@ -119,18 +121,55 @@ const nextMemberPrompt = () => {
       return promptIntern();
     }
     else {
+      const teamDataArr =[];
       console.log('data collected');
       //console.log(this.Manager);
-      console.log(managerData);
-      console.log(managerData.name);
-      console.log(managerData.id);
+      //console.log(managerData);
+      //console.log(managerData.name);
+      //console.log(managerData.id);
       //console.log(this.Engineer);
       const engineerData = this.Engineer;
-      console.log(engineerData);
+      //console.log(engineerData);
       const internData = this.Intern;
-      console.log(internData);
+      //console.log(internData);
+      // TODO: create data array and push variables into it??
+      teamDataArr.push(managerData, engineerData, internData);
+      //console.log(teamDataArr);
+      return teamDataArr;
+      //return managerData, engineerData, internData;
     }
   })
 };
 
-promptManager();
+const writeFile = (pageHTML) => {
+  return new Promise((resolve, reject) => {
+    fs.writeFile('./dist/index.html', pageHTML, err => {
+      // if there's an error, reject the Promise and send the error to the Promise's `.catch()` method
+      if (err) {
+        reject(err);
+        // return out of the function here to make sure the Promise doesn't  accidentally execute the resolve() function as well
+        return;
+      }
+
+      // if everything went well, resolve the Promise and send the successful data to the `.then()` method
+      resolve({
+        ok: true,
+        message:'File created!'
+      });
+    });
+  });
+};
+
+promptManager()
+.then(teamDataArr => {
+  return generatePage(teamDataArr);
+})
+.then(pageHTML => {
+  return writeFile(pageHTML);
+})
+.then(writeFileResponse => {
+  console.log(writeFileResponse);
+})
+.catch(err => {
+  console.log(err);
+});

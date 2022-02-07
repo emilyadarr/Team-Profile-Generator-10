@@ -1,52 +1,69 @@
-const generateManagerCards = (managerData) => {
+const generateManagerCards = managerData => {
   return `
   <div class="card" style="width: 18rem;">
-  <div class="card-header">
-    ${managerData.name}
-    ${managerData.role}
+      <div class="card-header">
+        ${managerData.name}
+        ${managerData.role}
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">ID: ${managerData.id}</li>
+        <li class="list-group-item">Email: ${managerData.email}</li>
+        <li class="list-group-item">Office Number: ${managerData.officeNumber}</li>
+      </ul>
   </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">ID: ${managerData.id}</li>
-    <li class="list-group-item">Email: ${managerData.email}</li>
-    <li class="list-group-item">Office Number: ${managerData.officeNumber}</li>
-  </ul>
-</div>
-`;
+  `;
 }
 
-const generateEngineerCards = (engineerData) => {
+const generateEngineerCards = engineerData => {
   return `
   <div class="card" style="width: 18rem;">
-  <div class="card-header">
-    ${engineerData.name}
-    ${engineerData.role}
+  ${engineerData.map(({ name, id, email, role, github }) => {
+    return `
+    <div class="card-header">
+    ${name}
+    ${role}
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">ID: ${id}</li>
+      <li class="list-group-item">Email: ${email}</li>
+      <li class="list-group-item">GitHub: ${github}</li>
+    </ul>
+    `;
+  })
+  .join('')}
   </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">ID: ${engineerData.id}</li>
-    <li class="list-group-item">Email: ${engineerData.email}</li>
-    <li class="list-group-item">GitHub: ${engineerData.github}</li>
-  </ul>
-</div>
-`;
-}
+  `;
+};
 
-const generateInternCards = (internData) => {
+const generateInternCards = internData => {
   return `
   <div class="card" style="width: 18rem;">
-  <div class="card-header">
-    ${internData.name}
-    ${internData.role}
+  ${internData.map(({ name, id, email, role, school }) => {
+    return `
+    <div class="card-header">
+    ${name}
+    ${role}
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">ID: ${id}</li>
+      <li class="list-group-item">Email: ${email}</li>
+      <li class="list-group-item">School: ${school}</li>
+    </ul>
+    `;
+  })
+  .join('')}
   </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">ID: ${internData.id}</li>
-    <li class="list-group-item">Email: ${internData.email}</li>
-    <li class="list-group-item">School: ${internData.school}</li>
-  </ul>
-</div>
-`;
-}
+  `;
+};
 
-module.exports = templateData => {
+module.exports = (teamDataArr) => {
+  const manager = teamDataArr[0];
+  const engineer = teamDataArr[1];
+  const intern = teamDataArr[2];
+  console.log(teamDataArr);
+  console.log(manager);
+  console.log(engineer);
+  console.log(intern);
   return `
   <!DOCTYPE html>
   <html lang="en"> 
@@ -67,9 +84,10 @@ module.exports = templateData => {
       </div>
     </header>
     <main class="container my-5">
-      ${generateManagerCards(managerData)}
-      ${generateEngineerCards(engineerData)}
-      ${generateInternCards(internData)}
+      ${generateManagerCards(manager)}
+      ${generateEngineerCards(engineer)}
+      ${generateInternCards(intern)}
+      
     </main>
 
     <footer>
