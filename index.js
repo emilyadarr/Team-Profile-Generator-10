@@ -123,20 +123,10 @@ const nextMemberPrompt = () => {
     else {
       const teamDataArr =[];
       console.log('data collected');
-      //console.log(this.Manager);
-      //console.log(managerData);
-      //console.log(managerData.name);
-      //console.log(managerData.id);
-      //console.log(this.Engineer);
       const engineerData = this.Engineer;
-      //console.log(engineerData);
       const internData = this.Intern;
-      //console.log(internData);
-      // TODO: create data array and push variables into it??
       teamDataArr.push(managerData, engineerData, internData);
-      //console.log(teamDataArr);
       return teamDataArr;
-      //return managerData, engineerData, internData;
     }
   })
 };
@@ -160,6 +150,22 @@ const writeFile = (pageHTML) => {
   });
 };
 
+const copyFile = () => {
+  return new Promise((resolve, reject) => {
+    fs.copyFile('./src/style.css', './dist/style.css', err => {
+      if (err) {
+        reject(err);
+        return;
+      }
+
+      resolve({
+        ok: true,
+        message:'Stylesheet copied!'
+      });
+    });
+  });
+};
+
 promptManager()
 .then(teamDataArr => {
   return generatePage(teamDataArr);
@@ -169,6 +175,10 @@ promptManager()
 })
 .then(writeFileResponse => {
   console.log(writeFileResponse);
+  return copyFile();
+})
+.then(copyFileResponse => {
+  console.log(copyFileResponse);
 })
 .catch(err => {
   console.log(err);
