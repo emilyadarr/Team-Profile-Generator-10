@@ -15,22 +15,55 @@ const promptManager = () => {
     {
       type: 'input',
       name: 'name',
-      message: "What is the team manager's name?"
+      message: "What is the team manager's name?",
+      validate: nameInput => {
+        if (nameInput) {
+          return true;
+        } else {
+          console.log("Please enter the team manager's name!");
+          return false;
+        }
+      }
     },
     {
       type: 'input',
       name: 'id',
-      message: "What is the team manager's id?"
+      message: "What is the team manager's id?",
+      validate: idNumber => {
+        if (!isNaN(idNumber)) {
+          return true;
+        } else {
+          console.log("Please enter a valid id!");
+          return false;
+        }
+      }
     },
     {
       type: 'input',
       name: 'email',
-      message: "What is the team manager's email?"
+      message: "What is the team manager's email?",
+      validate: emailInput => {
+        valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(emailInput)
+        if (valid) {
+          return true;
+        } else {
+          console.log("Please enter a valid email address!");
+          return false;
+        }
+      }
     },
     {
       type: 'input',
       name: 'officeNumber',
-      message: "What is the team manager's office number?"
+      message: "What is the team manager's office number?",
+      validate: officeNumberInput => {
+        if (!isNaN(officeNumberInput)) {
+          return true;
+        } else {
+          console.log("Please enter a valid office number!");
+          return false;
+        }
+      }
     }
   ])
   .then(({ name, id, email, officeNumber }) => {
@@ -49,22 +82,55 @@ const promptEngineer = () => {
     {
       type: 'input',
       name: 'name',
-      message: "What is your engineer's name?"
+      message: "What is your engineer's name?",
+      validate: nameInput => {
+        if (nameInput) {
+          return true;
+        } else {
+          console.log("Please enter your engineer's name!");
+          return false;
+        }
+      }
     },
     {
       type: 'input',
       name: 'id',
-      message: "What is your engineer's id?"
+      message: "What is your engineer's id?",
+      validate: idNumber => {
+        if (!isNaN(idNumber)) {
+          return true;
+        } else {
+          console.log("Please enter a valid id!");
+          return false;
+        }
+      }
     },
     {
       type: 'input',
       name: 'email',
-      message: "What is your engineer's email?"
+      message: "What is your engineer's email?",
+      validate: emailInput => {
+        valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(emailInput)
+        if (valid) {
+          return true;
+        } else {
+          console.log("Please enter a valid email address!");
+          return false;
+        }
+      }
     },
     {
       type: 'input',
       name: 'github',
-      message: "What is your engineer's GitHub username?"
+      message: "What is your engineer's GitHub username?",
+      validate: githubInput => {
+        if (githubInput) {
+          return true;
+        } else {
+          console.log("Please enter your engineer's username!");
+          return false;
+        }
+      }
     }
   ])
   .then(({ name, id, email, github }) => {
@@ -82,22 +148,55 @@ const promptIntern = () => {
     {
       type: 'input',
       name: 'name',
-      message: "What is your intern's name?"
+      message: "What is your intern's name?",
+      validate: nameInput => {
+        if (nameInput) {
+          return true;
+        } else {
+          console.log("Please enter your intern's name!");
+          return false;
+        }
+      }
     },
     {
       type: 'input',
       name: 'id',
-      message: "What is your intern's id?"
+      message: "What is your intern's id?",
+      validate: idNumber => {
+        if (!isNaN(idNumber)) {
+          return true;
+        } else {
+          console.log("Please enter a valid id!");
+          return false;
+        }
+      }
     },
     {
       type: 'input',
       name: 'email',
-      message: "What is your intern's email?"
+      message: "What is your intern's email?",
+      validate: emailInput => {
+        valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(emailInput)
+        if (valid) {
+          return true;
+        } else {
+          console.log("Please enter a valid email address!");
+          return false;
+        }
+      }
     },
     {
       type: 'input',
       name: 'school',
-      message: "What is your intern's school?"
+      message: "What is your intern's school?",
+      validate: schoolInput => {
+        if (schoolInput) {
+          return true;
+        } else {
+          console.log("Please enter your intern's school!");
+          return false;
+        }
+      }
     }
   ])
   .then(({ name, id, email, school }) => {

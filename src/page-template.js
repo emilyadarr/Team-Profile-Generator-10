@@ -3,7 +3,7 @@ const generateManagerCards = managerData => {
   <div class="card" style="width: 18rem;">
       <div class="card-header header-card">
         <h3>${managerData.name}</h3>
-        <h4>${managerData.role}</h4>
+        <h4><i class ="fa-solid fa-mug-saucer"></i> ${managerData.role}</h4>
       </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">ID: ${managerData.id}</li>
@@ -15,13 +15,16 @@ const generateManagerCards = managerData => {
 }
 
 const generateEngineerCards = engineerData => {
+  if (!engineerData) {
+    return ``
+  }
   return `
   ${engineerData.map(({ name, id, email, role, github }) => {
     return `
     <div class="card" style="width: 18rem;">
     <div class="card-header header-card">
     <h3>${name}</h3>
-    <h4>${role}</h4>
+    <h4><i class="fa-solid fa-laptop-code"></i> ${role}</h4>
     </div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item">ID: ${id}</li>
@@ -36,13 +39,16 @@ const generateEngineerCards = engineerData => {
 };
 
 const generateInternCards = internData => {
+  if (!internData) {
+    return ``
+  }
   return `
   ${internData.map(({ name, id, email, role, school }) => {
     return `
     <div class="card" style="width: 18rem;">
     <div class="card-header header-card">
     <h3>${name}</h3>
-    <h4>${role}</h4>
+    <h4><i class="fa-solid fa-graduation-cap"></i> ${role}</h4>
     </div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item">ID: ${id}</li>
@@ -70,6 +76,7 @@ module.exports = (teamDataArr) => {
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>My Team</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <link rel="stylesheet" href="style.css">
   </head>
 
