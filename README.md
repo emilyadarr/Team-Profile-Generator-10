@@ -6,3 +6,4 @@
 
 [Walkthrough Video](https://watch.screencastify.com/v/YyGcvvrd8iykMlJ1jTcE)
 
+![image](https://github.com/emilyadarr/team-profile-generator-10/blob/b9725e306dffe9a3edad54140e7546d9db3d8615/images/team-profile-generator-example.png)
