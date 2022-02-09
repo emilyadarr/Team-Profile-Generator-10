@@ -1,3 +1,4 @@
+// generate manager card
 const generateManagerCards = managerData => {
   return `
   <div class="card" style="width: 18rem;">
@@ -14,7 +15,9 @@ const generateManagerCards = managerData => {
   `;
 }
 
+// generate engineer cards
 const generateEngineerCards = engineerData => {
+  // if there is no engineer data, return empty
   if (!engineerData) {
     return ``
   }
@@ -38,7 +41,9 @@ const generateEngineerCards = engineerData => {
   `;
 };
 
+// generate intern cards
 const generateInternCards = internData => {
+  // if there is no intern data, return empty
   if (!internData) {
     return ``
   }
@@ -62,6 +67,7 @@ const generateInternCards = internData => {
   `;
 };
 
+// divide data into manager, engineer and intern arrays
 module.exports = (teamDataArr) => {
   const manager = teamDataArr[0];
   const engineer = teamDataArr[1];
@@ -92,10 +98,6 @@ module.exports = (teamDataArr) => {
       ${generateInternCards(intern)}
       
     </main>
-
-    <footer>
-      <h3></h3>
-    </footer>
   </body>
   </html>
   `;

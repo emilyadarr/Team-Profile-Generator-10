@@ -1,12 +1,11 @@
 const inquirer = require('inquirer');
-//const Employee = require('./lib/Employee');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
-//const Employee = require('./lib/Employee');
 const generatePage = require('./src/page-template');
 const fs = require('fs');
 
+// Manager questions 
 const promptManager = () => {
   console.log(`Please build your team`);
   
@@ -72,8 +71,8 @@ const promptManager = () => {
   .then(nextMemberPrompt)
 };
 
+// Engineer questions
 const promptEngineer = () => {
-  // engineerData = this.Engineer
   if (!this.Engineer) {
     this.Engineer = [];
   }
@@ -139,8 +138,8 @@ const promptEngineer = () => {
   .then(nextMemberPrompt)
 };
 
+// Intern questions
 const promptIntern = () => {
-  //internData = this.Engineer
   if (!this.Intern) {
     this.Intern = [];
   }
@@ -205,6 +204,7 @@ const promptIntern = () => {
   .then(nextMemberPrompt)
 };
 
+// Next Member prompt to determine which prompt to circle back to
 const nextMemberPrompt = () => {
   return inquirer.prompt({
     type: 'list',
@@ -221,7 +221,7 @@ const nextMemberPrompt = () => {
     }
     else {
       const teamDataArr =[];
-      console.log('data collected');
+      // console.log('data collected');
       const engineerData = this.Engineer;
       const internData = this.Intern;
       teamDataArr.push(managerData, engineerData, internData);
@@ -230,6 +230,7 @@ const nextMemberPrompt = () => {
   })
 };
 
+// Take pageHTML and write the index.html file into the dist folder
 const writeFile = (pageHTML) => {
   return new Promise((resolve, reject) => {
     fs.writeFile('./dist/index.html', pageHTML, err => {
@@ -249,6 +250,7 @@ const writeFile = (pageHTML) => {
   });
 };
 
+// copy the style.css file into the dist folder
 const copyFile = () => {
   return new Promise((resolve, reject) => {
     fs.copyFile('./src/style.css', './dist/style.css', err => {
@@ -265,6 +267,7 @@ const copyFile = () => {
   });
 };
 
+// intial prompt 
 promptManager()
 .then(teamDataArr => {
   return generatePage(teamDataArr);
@@ -273,11 +276,11 @@ promptManager()
   return writeFile(pageHTML);
 })
 .then(writeFileResponse => {
-  console.log(writeFileResponse);
+  console.log(writeFileResponse.message);
   return copyFile();
 })
 .then(copyFileResponse => {
-  console.log(copyFileResponse);
+  console.log(copyFileResponse.message);
 })
 .catch(err => {
   console.log(err);
